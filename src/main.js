@@ -1,14 +1,16 @@
 class App {
   constructor() {
     this.imgList = [];
-    this.imgForm = document.getElementById('repo-submit');
-    this.teste = document.getElementById('teste');
-    this.imgInput = document.querySelector('input[type="file"]'); // Corrigido aqui
+    this.cont = 0;
+    this.imgForm = document.getElementById('image-form');
+    this.galleryForm = document.getElementById('gallery');
+    this.imgInput = document.getElementById('image-input');
     this.preview = document.getElementById('preview');
-    this.previewImage();
-    this.callImg();
+
+    this.setupPreview();
+    this.setupFormSubmit();
   }
-  previewImage() {
+  setupPreview() {
     this.imgInput.addEventListener('change', e => {
       const file = e.target.files[0];
       if (file) {
@@ -20,16 +22,32 @@ class App {
       }
     });
   }
-  callImg(){
-    this.imgForm.onsubmit = event => ths.addImgView(event)
+  setupFormSubmit(){
+    this.imgForm.addEventListener('submit', event => {
+      event.preventDefault();
+      this.addImgView(event);
+    })
   }
 
   addImgView(event){
     event.preventDefault();
-    const imagem = document.createElement('img');
-    imagem.src = URL.createObjectURL(this.imgInput);
-    this.teste.appendChild(imagem);
-    this.imgList.push(imagem)
+    this.cont ++;
+    const file = this.imgInput.files[0];
+    const ImgUrl = URL.createObjectURL(file)
+    const imgElement = document.createElement('img');
+    imgElement.className = "image";
+    imgElement.src = ImgUrl;
+    imgElement.alt = `Imagem ${this.cont}`;
+
+    
+    this.galleryForm.appendChild(imgElement);
+    this.imgList.push({
+      element: imgElement,
+      url: ImgUrl
+    });
+
+    this.imgInput.value = '';
+    this.preview.innerHTML = '';
 
   }
   

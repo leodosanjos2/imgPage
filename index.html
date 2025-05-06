@@ -3,26 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pré-visualização de Imagem</title>
-  <style>
-    #preview img {
-      max-width: 300px;
-      margin-top: 20px;
-    }
-  </style>
+  <title>Upload de Imagens</title>
+  <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-  <h1>Selecione uma imagem</h1>
-  <div id="repo-submit">
-    <input type="file" name="adicionar" accept="image/*" required>
+  <h1>Upload de Imagens</h1>
+  
+  <form id="image-form" class="upload-container">
+    <h2>Adicionar Nova Imagem</h2>
+    <input type="file" id="image-input" accept="image/*" required>
     <div id="preview"></div>
     <button type="submit">Enviar Imagem</button>  
-  </div>
-  <div id="teste">
-
-  </div>
+  </form>
   
-  <script type="module" src="/src/main.js"></script>
+  <h2>Galeria de Imagens</h2>
+  <div id="gallery"></div>
   
+  <script src="/src/main.js"></script>
 </body>
 </html>
