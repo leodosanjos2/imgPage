@@ -1,0 +1,9 @@
+body{
+  background-color: black;
+  color: white;
+}
+
+#preview img {
+  max-width: 300px;
+  margin-top: 20px;
+}
