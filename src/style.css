@@ -1,8 +1,3 @@
-#preview img {
-  max-width: 300px;
-  margin-top: 20px;
-}
-
 body {
   background-color: #000000;
   color: #f5f5f5;
@@ -11,16 +6,31 @@ body {
   margin: 0 auto;
   padding: 20px;
 }
-
+.error {
+  color: #f44336;
+  margin-top: 5px;
+}
 .upload-container {
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
+button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover {
+  background: #45a049;
+}
 
-.image{
-  transition: .5s ease;
-  backface-visibility: hidden;
+#preview img {
+  max-width: 300px;
+  margin-top: 20px;
 }
 
 #preview .image {
@@ -32,40 +42,109 @@ body {
 
 #gallery {
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 15px;
   margin-top: 30px;
+  user-select: none;
 }
 
-#gallery .image {
+#gallery .img-container .image {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-#gallery:hover .image{
-  opacity: 0.3;
-  background-color: white;
-
-}
-
-button {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
+  display: block;
   cursor: pointer;
-  margin-top: 10px;
+  user-select: none;
 }
 
-button:hover {
-  background: #45a049;
+#gallery .img-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  opacity: 1;
 }
 
-.error {
-  color: #f44336;
-  margin-top: 5px;
+#gallery .hoverbtn {
+  position: absolute;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#gallery .btn-delete {
+  left: 50%;
+  position: center;
+}
+
+#gallery .img-container:hover .hoverbtn {
+  opacity: 1;
+}
+#gallery .img-container:hover .image{
+  transition: opacity 0.3s ease;
+  opacity: 0.3;
+}
+/* Caso seja necessário aplicar uma imagem no hover 
+   para mostrar ao usuario o icon de visualizar a imagem cheia
+#gallery .img-container:hover::after{
+  content: '';
+  position: absolute;
+  top: 0;left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(/public/zoom.png) center no-repeat;
+  background-size: 100px;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+} */
+
+#popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: none; /* Mantenha como none inicialmente */
+  justify-content: center;
+  align-items: center;
+}
+
+#spanImg {
+  position: fixed; /* Alterado de absolute para fixed */
+  top: 20px;
+  right: 40px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1001; /* Z-index maior que o container */
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+#popup-container img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #fff;
+  border-radius: 5px;
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+
+@media screen {
+  #popup-container img{
+    width: 95%;
+  }
 }
